@@ -18,6 +18,8 @@ const SpeakIcon = ({
           toggle();
           return;
         }
+        // TODO: cancel audio play if isPlaying
+        toggle();
       }}
       className={clsx(
         'text-sm overflow-hidden border-4 fixed bottom-4 left-1/2 transform -translate-x-1/2 w-16 h-16 rounded-full cursor-pointer transition-all duration-300 flex items-center justify-center',
@@ -30,7 +32,7 @@ const SpeakIcon = ({
           'w-full h-full text-center  bg-gradient-to-r transition-all',
           !listening &&
             !(isPlaying || isWaiting || userSpeaking) &&
-            'from-gray-400 via-gray-500 to-gray-600',
+            'from-gray-500 via-gray-600 to-gray-800',
           isPlaying || isWaiting
             ? 'from-pink-500 p-4 via-red-500 to-yellow-500'
             : 'from-green-400  via-cyan-500 to-blue-500',
