@@ -13,7 +13,7 @@ stt = WhisperModel(model_size, device="cpu", compute_type="float32")
 
 
 def transcribe_audio(data):
-    segments, info = stt.transcribe(data)
+    segments, info = stt.transcribe(data, language="en")
     segments = list(segments)
     if not segments:
         print("No segments found")
