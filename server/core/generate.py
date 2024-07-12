@@ -1,9 +1,11 @@
 from .tts import TextToSpeechService
+import numpy as np
 
-tts = TextToSpeechService()
+tts = TextToSpeechService(model_path="models/en_us_hifi92_light_cpu.addon")
 
 
 def generate_audio(text):
     print("generating")
-    sample_rate, audio_array = tts.synthesize(text)
-    return sample_rate, audio_array
+    data, rate = tts.synthesize(text)
+    audio_float32 = data.astype(np.float32) / 32768.0
+    return audio_float32, rate

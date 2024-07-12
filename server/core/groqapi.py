@@ -9,7 +9,11 @@ def get_completion(query: str):
         messages=[
             {
                 "role": "system",
-                "content": "you are a helpful assistant who responds with short and concise answers.",
+                "content": """
+                you are a helpful voice assistant who responds with short, concise answers.
+                respond in a conversational and friendly tone as if in speech.
+                all responses are converted to voice, and hence must not contain symbols or formatted in ways which will make voice unnatural.
+                """,
             },
             query,
         ],
@@ -20,4 +24,4 @@ def get_completion(query: str):
         stop=None,
         stream=False,
     )
-    return chat_completion.choices
+    return chat_completion
