@@ -29,16 +29,14 @@ def handle_connect():
 
 
 @socketio.on("audio_data")
-def handle_audio_data(data):
+def handle_audio_data(data, history):
     audio_array = np.frombuffer(data, dtype=np.float32)
 
     prompt = transcribe_audio(audio_array).strip()
     if not prompt:
         emit("no_prompt_recognised")
         return
-    response = (
-        get_completion({"role": "user", "content": prompt}).choices[0].message.content
-    )
+    response = get_completion(history=history, prompt=prompt).choices[0].message.content
     audio_data, rate = generate_audio(response)
     emit("prompt_response", (prompt, response, audio_data.tolist(), rate))
 
@@ -56,4 +54,4 @@ def home():
 
 
 if __name__ == "__main__":
-    socketio.run(app)
+    socketio.run(app, debug=True)

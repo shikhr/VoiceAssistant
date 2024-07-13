@@ -11,7 +11,7 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const { isConnected, socket } = useSocket();
-  const { playAudio } = useAudio();
+  const { playAudio, stopAudio } = useAudio();
 
   const { loading, listening, errored, userSpeaking, start, pause, toggle } =
     useMicVAD({
@@ -20,12 +20,14 @@ const App = () => {
       minSpeechFrames: 2,
       preSpeechPadFrames: 10,
       onSpeechStart: () => {
+        stopAudio();
         console.log('Speech start detected');
       },
       onSpeechEnd: (audio) => {
         console.log('end speech');
         if (socket.connected) {
-          socket.emit('audio_data', audio);
+          const history = messages.slice(0, 5).reverse().flat();
+          socket.emit('audio_data', audio, history);
           setIsWaiting(true);
           pause();
         }
@@ -36,13 +38,15 @@ const App = () => {
     const handlePromptResponse = async (prompt, response, audio_data, rate) => {
       setIsWaiting(false);
       setMessages((prevMessages) => [
-        { type: 'prompt', content: prompt },
-        { type: 'response', content: response },
+        [
+          { type: 'prompt', content: prompt },
+          { type: 'response', content: response },
+        ],
         ...prevMessages,
       ]);
+      start();
       setIsPlaying(true);
       await playAudio(audio_data, rate);
-      start();
       setIsPlaying(false);
     };
     const handleNoPromptFound = () => {

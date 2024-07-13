@@ -29,7 +29,13 @@ const useAudio = () => {
     });
   };
 
-  return { playAudio };
+  const stopAudio = () => {
+    if (sourceRef.current) {
+      sourceRef.current.stop();
+    }
+  };
+
+  return { playAudio, stopAudio };
 };
 
 export default useAudio;

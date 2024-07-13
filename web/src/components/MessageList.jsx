@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const MessageList = ({ messages }) => {
   return (
     <div className="w-full flex flex-col items-center py-4 max-w-3xl px-3 space-y-4 overflow-auto max-h-[80vh]">
-      {messages.map((message, index) => (
+      {messages.flat().map((message, index) => (
         <div
           key={index}
           className={clsx(
@@ -23,6 +23,5 @@ const MessageList = ({ messages }) => {
 
 MessageList.propTypes = {
   messages: PropTypes.array.isRequired,
-  isPlaying: PropTypes.bool.isRequired,
 };
 export default MessageList;

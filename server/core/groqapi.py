@@ -4,7 +4,14 @@ import os
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 
-def get_completion(query: str):
+def get_completion(history, prompt):
+    history = [
+        {
+            "role": "user" if msg["type"] == "prompt" else "assistant",
+            "content": msg["content"],
+        }
+        for msg in history
+    ]
     chat_completion = client.chat.completions.create(
         messages=[
             {
@@ -15,7 +22,8 @@ def get_completion(query: str):
                 all responses are converted to voice, and hence must not contain symbols or formatted in ways which will make voice unnatural.
                 """,
             },
-            query,
+            *history,
+            {"role": "user", "content": prompt},
         ],
         model="llama3-8b-8192",
         temperature=0.8,
