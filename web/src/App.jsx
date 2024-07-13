@@ -58,14 +58,6 @@ const App = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white p-2">
-      <div
-        className={`mb-4 text-lg ${
-          isConnected ? 'text-green-500' : 'text-red-500'
-        }`}
-      >
-        {isConnected ? 'Connected' : 'Disconnected'}
-      </div>
-
       <MessageList messages={messages} />
       <SpeakIcon
         isConnected={isConnected}
@@ -73,9 +65,9 @@ const App = () => {
         userSpeaking={userSpeaking}
         listening={listening}
         isPlaying={isPlaying}
+        isLoading={loading}
         toggle={toggle}
       />
-      {loading && <div className="mt-4 text-yellow-500">Loading...</div>}
       {errored && (
         <div className="mt-4 text-red-500">Error: {errored.message}</div>
       )}

@@ -8,6 +8,7 @@ const SpeakIcon = ({
   userSpeaking,
   listening,
   isPlaying,
+  isLoading,
   toggle,
 }) => {
   return (
@@ -22,9 +23,11 @@ const SpeakIcon = ({
         toggle();
       }}
       className={clsx(
-        'text-sm overflow-hidden border-4 fixed bottom-4 left-1/2 transform -translate-x-1/2 w-16 h-16 rounded-full cursor-pointer transition-all duration-300 flex items-center justify-center',
+        'text-sm overflow-hidden border-4 fixed bottom-4 left-1/2 transform -translate-x-1/2 w-16 h-16 rounded-full cursor-pointer transition-all duration-500 flex items-center justify-center',
         (isPlaying || userSpeaking) &&
-          'shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_10px_#08f]'
+          'shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_10px_#08f]',
+        isConnected && 'border-green-100',
+        !isConnected && 'border-red-500'
       )}
     >
       <div
@@ -50,5 +53,6 @@ SpeakIcon.propTypes = {
   listening: PropTypes.bool.isRequired,
   toggle: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 export default SpeakIcon;
