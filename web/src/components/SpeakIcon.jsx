@@ -30,12 +30,11 @@ const SpeakIcon = ({
       <div
         className={clsx(
           'w-full h-full text-center  bg-gradient-to-r transition-all',
-          !listening &&
-            !(isPlaying || isWaiting || userSpeaking) &&
-            'from-gray-500 via-gray-600 to-gray-800',
           isPlaying || isWaiting
             ? 'from-pink-500 p-4 via-red-500 to-yellow-500'
-            : 'from-green-400  via-cyan-500 to-blue-500',
+            : listening
+            ? 'from-green-400  via-cyan-500 to-blue-500'
+            : 'from-gray-400 via-gray-500 to-gray-700',
           (isPlaying || userSpeaking) && 'background-animate',
           isWaiting && 'animate-spin'
         )}
