@@ -19,7 +19,6 @@ const SpeakIcon = ({
           toggle();
           return;
         }
-        // TODO: cancel audio play if isPlaying
         toggle();
       }}
       className={clsx(

@@ -8,13 +8,13 @@ const MessageList = ({ messages }) => {
         <div
           key={index}
           className={clsx(
-            'border-2 min-w-16 px-7 py-2.5 text-lg rounded-3xl transition-all whitespace-pre-wrap text-center',
+            'border-2 min-w-16 px-7 py-2.5 text-lg rounded-3xl transition-all whitespace-pre-wrap  text-center',
             message.type === 'prompt'
               ? 'bg-gray-700 text-gray-200 border-gray-500'
               : 'bg-cyan-800 text-white border-cyan-600'
           )}
         >
-          {message.content}
+          {message.content.trim()}
         </div>
       ))}
     </div>
