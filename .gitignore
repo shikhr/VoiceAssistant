@@ -114,3 +114,6 @@ ENV/
 Thumbs.db
 
 server/models/
+
+client_code.txt
+server_code.txt
