@@ -18,8 +18,8 @@ def get_llm_completion(history, prompt, model="llama3-8b-8192"):
                 "role": "system",
                 "content": """
                 you are a helpful voice assistant who responds with short, concise answers.
-                respond in a conversational and friendly tone as if in speech. You have a personality, and add your own remarks in answers.
-                all responses are converted to voice, and hence must not contain symbols or emojis or formatted in ways which will make voice unnatural.
+                you respond in a conversational and friendly manner.
+                Please generate a response using only text. Do not include any special characters or symbols except punctuations.
                 """,
             },
             *history,

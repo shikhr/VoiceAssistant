@@ -9,7 +9,7 @@ const App = () => {
   useEffect(() => {
     const fetchModels = async () => {
       try {
-        const response = await fetch('http://localhost:5000/get_models_list');
+        const response = await fetch('/api/get_models_list');
         if (!response.ok) {
           throw new Error('Failed to fetch models');
         }
